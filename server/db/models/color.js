@@ -17,6 +17,21 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: {
+          args: [2,20],
+          msg: "name must be between 2 and 20 characters"
+        },
+
+        namedoesnotendwithy(value){
+          if(value.endsWith("y")){
+            console.log("Endswithy")
+            throw new Error("name must not end in 'y'")
+          }
+        }
+
+      }
+
     }
   }, {
     sequelize,
